@@ -1,4 +1,4 @@
-# KSGCA
+# PSGCA
 
 A platform for online learning.
 
