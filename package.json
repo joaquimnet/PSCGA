@@ -1,0 +1,31 @@
+{
+  "name": "Pscga",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "lint": "eslint ./src",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Joaquim Neto <joaquimmy@yahoo.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^7.9.0",
+    "nodemon": "^2.0.4"
+  },
+  "dependencies": {
+    "connect-mongodb-session": "^2.4.1",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "helmet": "^4.1.1",
+    "mongoose": "^5.10.6",
+    "morgan": "^1.10.0",
+    "passport": "^0.4.1",
+    "passport-discord": "^0.1.4",
+    "passport-google-oauth": "^2.0.0",
+    "tiny-env": "github:joaquimnet/tiny-env"
+  }
+}

@@ -1,0 +1,199 @@
+:root {
+  --nice-blue: rgb(11 149 191);
+}
+
+.navbar {
+  padding: 0 1rem;
+  height: 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid black;
+}
+
+.navbar .brand {
+  font-family: Raleway;
+  font-size: 2rem;
+}
+
+.navbar .brand a {
+  color: black;
+}
+
+.navbar ul {
+  height: 100%;
+  list-style: none;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+
+.navbar ul li {
+  margin: 0 1rem;
+}
+
+.hero {
+  height: calc(100vh - 4rem);
+  position: relative;
+}
+
+.hero .blur {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: rgba(0, 0, 0, 0.3);
+  background: url('/img/hero.jpg') center/cover;
+  filter: blur(2px);
+}
+
+.hero h1 {
+  text-shadow: -1px -1px rgba(0, 0, 0, 0.2), 2px 2px rgba(0, 0, 0, 0.3), 2px 2px cyan;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  text-shadow: 1px 1px black, -1px -1px rgba(0, 0, 0, 0.2);
+  text-align: left;
+  margin-bottom: 0.5rem;
+}
+
+.hero h1,
+.hero p {
+  color: white;
+  filter: none;
+  z-index: 100;
+  max-width: 90%;
+}
+
+@media only screen and (min-width: 600px) {
+  .hero h1 {
+    font-size: 3rem;
+  }
+  .hero p {
+    font-size: 1.5rem;
+  }
+}
+@media only screen and (min-width: 980px) {
+  .hero h1,
+  .hero p {
+    max-width: 70%;
+  }
+  .hero p {
+    font-size: 1.7rem;
+  }
+}
+@media only screen and (min-width: 1040px) {
+  .hero h1 {
+    font-size: 4rem;
+  }
+  .hero p {
+    font-size: 2rem;
+  }
+}
+
+.divider {
+  height: 2rem;
+  transform: translateY(-1rem);
+  background: black;
+}
+
+main {
+  padding: 1rem 3rem;
+}
+@media only screen and (min-width: 1024px) {
+  main {
+    padding: 1rem 5rem;
+  }
+}
+@media only screen and (min-width: 1360px) {
+  main {
+    padding: 1rem 12rem;
+  }
+}
+@media only screen and (min-width: 720px) {
+  .page-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+  }
+}
+
+a,
+a:visited {
+  text-decoration: none;
+  color: rgb(11 149 191);
+}
+
+h1.display {
+  font-size: 3rem;
+  font-weight: lighter;
+  border-bottom: 2px solid var(--nice-blue);
+  margin-bottom: 1rem;
+}
+
+.form-control {
+  margin: 1rem 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.form-control label {
+  margin-bottom: 0.25rem;
+  font-size: 1.1rem;
+  width: 60%;
+}
+
+.form-control input[type='checkbox'] {
+  border: 1px solid black;
+  border-radius: 3px;
+  height: 2rem;
+  width: 2rem;
+  padding: 0 0.5rem;
+}
+
+.form-control input[type='submit'] {
+  background-color: #9a5ee9;
+  color: white;
+  font: inherit;
+  font-size: 1.5rem;
+  height: 3rem;
+  width: 30%;
+  border: none;
+  border-radius: 3px;
+}
+
+.form-control input[type='submit']:active,
+.form-control input[type='submit']:hover,
+button {
+  filter: brightness(1.1);
+  cursor: pointer;
+}
+
+.quotes {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-around;
+}
+
+.quotes h2 {
+  text-transform: uppercase;
+  font-weight: normal;
+  font-size: 2.5rem;
+}
+
+.quotes h2:nth-of-type(1) {
+  color: var(--nice-blue);
+}
+
+.quotes h2:nth-of-type(2) {
+  color: magenta;
+}
+
+.quotes h2:nth-of-type(3) {
+  color: red;
+}
