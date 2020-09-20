@@ -26,7 +26,7 @@
     </nav>
     <main class="container-w profile">
       <% if (lecture) { %>
-      <h1 class="display"><%= lecture.title %></h1>
+      <h1 class="display"><%= lecture.grouping %> - <%= lecture.title %></h1>
       <%- content %> <% } else { %>
       <h1 class="display">Lecture not found</h1>
       <% } %>

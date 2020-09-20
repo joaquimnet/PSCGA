@@ -4,7 +4,7 @@ const router = express.Router();
 
 const controller = require('../controllers').course;
 
-router.get('/api/course/', express.json(), controller.list_courses);
+router.get('/api/courses/', express.json(), controller.list_courses);
 router.get('/api/course/:id', express.json(), controller.get_course);
 router.post('/api/course/', express.json(), controller.post_course);
 router.patch('/api/course/:id', express.json(), controller.patch_course);

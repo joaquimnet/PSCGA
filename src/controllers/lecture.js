@@ -10,7 +10,7 @@ exports.get_lecture_view = async (req, res) => {
   const lecture = await Lecture.byId(id);
   res.render('lecture', {
     lecture,
-    content: sanitize(lecture.content),
+    content: sanitize(lecture?.content),
   });
 };
 
@@ -38,20 +38,20 @@ exports.get_lecture = async (req, res) => {
 };
 
 exports.post_lecture = async (req, res) => {
-  const { moduleId, title, content } = req.body;
-  if (!moduleId || !title || !content) {
-    return res.status(401).send({ error: 'moduleId, title and content are required' });
+  const { moduleId, title, content, grouping } = req.body;
+  if (!moduleId || !title || !content || !grouping) {
+    return res.status(401).send({ error: 'moduleId, title, content and grouping are required' });
   }
   if (!(await Module.byId(moduleId))) {
     return res.status(401).send({ error: 'Module not found' });
   }
-  const lecture = new Lecture({ moduleId, title, content });
+  const lecture = new Lecture({ moduleId, title, content, grouping });
   await lecture.save();
   res.json(lecture);
 };
 
 exports.patch_lecture = async (req, res) => {
-  const { moduleId, title, content } = req.body;
+  const { moduleId, title, content, grouping } = req.body;
 
   const lecture = await Lecture.byId(req.params.id);
   if (!lecture) {
@@ -61,6 +61,7 @@ exports.patch_lecture = async (req, res) => {
   if (moduleId) lecture.moduleId = moduleId;
   if (title) lecture.title = title;
   if (content) lecture.content = content;
+  if (grouping) lecture.grouping = grouping;
 
   await lecture.save();
   res.json(lecture);

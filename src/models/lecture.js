@@ -14,6 +14,11 @@ const schema = new Schema(
       type: String,
       required: true,
     },
+    grouping: {
+      type: String,
+      required: true,
+      default: 'TBD-101',
+    },
   },
   { timestamps: true },
 );

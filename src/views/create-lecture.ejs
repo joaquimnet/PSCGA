@@ -33,6 +33,10 @@
           <input type="text" id="title" name="title" v-model="title" />
         </div>
         <div class="form-control">
+          <label for="grouping">Lecture Grouping Name</label>
+          <input type="text" id="grouping" name="grouping" v-model="grouping" />
+        </div>
+        <div class="form-control">
           <label for="course">Course</label>
           <select name="course" id="course" @change="onCourseChange" class="select-css">
             <option>---</option>
@@ -71,12 +75,13 @@
           courses: [],
           modules: [],
           title: '',
+          grouping: '',
         },
         methods: {
           onCourseChange(e) {
             console.log(e.target.value);
             this.selectedCourse = e.target.value;
-            fetch('/api/module/' + this.courseId)
+            fetch('/api/modules/' + this.courseId)
               .then((res) => res.json())
               .then((modules) => (this.modules = modules));
           },
@@ -94,6 +99,7 @@
             fetch('/api/lecture', {
               body: JSON.stringify({
                 title: this.title,
+                grouping: this.grouping,
                 content: window.editor.value,
                 moduleId: this.moduleId,
               }),
@@ -116,7 +122,7 @@
           },
         },
         mounted() {
-          fetch('/api/course')
+          fetch('/api/courses')
             .then((res) => res.json())
             .then((courses) => (this.courses = courses));
         },

@@ -4,7 +4,7 @@ const router = express.Router();
 
 const controller = require('../controllers').module;
 
-router.get('/api/module/:courseId', express.json(), controller.list_modules);
+router.get('/api/modules/:courseId', express.json(), controller.list_modules);
 router.get('/api/module/:id', express.json(), controller.get_module);
 router.post('/api/module/', express.json(), controller.post_module);
 router.patch('/api/module/:id', express.json(), controller.patch_module);
