@@ -2,28 +2,20 @@ const { Schema, model } = require('mongoose');
 
 const schema = new Schema(
   {
-    username: {
+    name: {
       type: String,
       required: true,
-      minlength: 2,
-      maxlength: 32,
     },
-    discordId: {
+    description: {
       type: String,
-      required: false,
-      unique: true,
-    },
-    googleId: {
-      type: String,
-      required: false,
-      unique: true,
+      required: true,
     },
   },
   { timestamps: true },
 );
 
 schema.statics.byId = async function byId(id) {
-  const Model = model('User');
+  const Model = model('Course');
   try {
     const doc = await Model.findById(id);
     return doc;
@@ -34,4 +26,4 @@ schema.statics.byId = async function byId(id) {
   }
 };
 
-module.exports = model('User', schema);
+module.exports = model('Course', schema);

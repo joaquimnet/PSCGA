@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <title>Ponatech School for Computer Graphics and Animation</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cookie&family=Raleway:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/utility.css" />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet" href="/css/jodit.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <nav class="navbar box-shadow">
+      <div class="brand"><a href="/">PSCGA</a></div>
+      <ul>
+        <li><a href="#">About</a></li>
+        <li><a href="http://art.ponatech.com/" class="cta">Go To Main Site</a></li>
+      </ul>
+    </nav>
+    <main class="container-w">
+      <div id="editor"></div>
+      <form @submit.prevent="submitForm" id="form">
+        <div class="form-control">
+          <label for="title">Lecture Title</label>
+          <input type="text" id="title" name="title" v-model="title" />
+        </div>
+        <div class="form-control">
+          <label for="course">Course</label>
+          <select name="course" id="course" @change="onCourseChange" class="select-css">
+            <option>---</option>
+            <option v-for="course of courses">
+              {{ course.name }}
+            </option>
+          </select>
+        </div>
+        <div class="form-control" v-if="modules.length">
+          <label for="module">Module</label>
+          <select name="module" id="module" @change="onModuleChange" class="select-css">
+            <option>---</option>
+            <option v-for="module of modules">
+              {{ module.name }}
+            </option>
+          </select>
+        </div>
+        <div class="form-control flex-center">
+          <input type="submit" value="Create Lecture" />
+        </div>
+      </form>
+    </main>
+    <script src="/js/jodit.min.js"></script>
+    <script>
+      window.editor = new Jodit('#editor', {
+        uploader: {
+          insertImageAsBase64URI: true,
+        },
+      });
+
+      window.$vm = new Vue({
+        el: '#form',
+        data: {
+          selectedCourse: '',
+          selectedModule: '',
+          courses: [],
+          modules: [],
+          title: '',
+        },
+        methods: {
+          onCourseChange(e) {
+            console.log(e.target.value);
+            this.selectedCourse = e.target.value;
+            fetch('/api/module/' + this.courseId)
+              .then((res) => res.json())
+              .then((modules) => (this.modules = modules));
+          },
+          onModuleChange(e) {
+            console.log(e.target.value);
+            this.selectedModule = e.target.value;
+          },
+          getCourseIdByName(name) {
+            return (this.courses.find((c) => c.name === name) || {})._id;
+          },
+          getModuleIdByName(name) {
+            return (this.modules.find((c) => c.name === name) || {})._id;
+          },
+          submitForm(e) {
+            fetch('/api/lecture', {
+              body: JSON.stringify({
+                title: this.title,
+                content: window.editor.value,
+                moduleId: this.moduleId,
+              }),
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            })
+              .then((res) => res.json())
+              .then(console.log)
+              .catch(console.error);
+          },
+        },
+        computed: {
+          courseId() {
+            return this.getCourseIdByName(this.selectedCourse);
+          },
+          moduleId() {
+            return this.getModuleIdByName(this.selectedModule);
+          },
+        },
+        mounted() {
+          fetch('/api/course')
+            .then((res) => res.json())
+            .then((courses) => (this.courses = courses));
+        },
+      });
+    </script>
+  </body>
+</html>

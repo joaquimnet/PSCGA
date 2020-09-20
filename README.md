@@ -8,9 +8,9 @@ A platform for online learning.
 
 Represents a user.
 
-### Term
+### Course
 
-Relates to a user, contains the classes this user is enrolled in and their respective grading data.
+Relates to a user, contains the modules this user is enrolled in and their respective grading data.
 
 ### Module
 
