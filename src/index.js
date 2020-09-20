@@ -17,7 +17,7 @@ const DiscordStrategy = require('./strategies/discord-strategy');
 
 const app = express();
 app.set('view engine', 'ejs');
-app.set('views', path.resolve('./src/views'));
+app.set('views', path.join(__dirname, './views'));
 
 app.use(morgan('tiny'));
 app.use(
