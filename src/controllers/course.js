@@ -1,3 +1,4 @@
+const { sanitize } = require('../util');
 const { Course } = require('../models');
 
 exports.get_course_editor = (req, res) => {
@@ -7,7 +8,7 @@ exports.get_course_editor = (req, res) => {
 exports.get_course_view = async (req, res) => {
   const { id } = req.params;
   const course = await Course.byId(id);
-  res.render('course', { course });
+  res.render('course', { course, content: sanitize(course.description) });
 };
 
 exports.list_courses = async (req, res) => {

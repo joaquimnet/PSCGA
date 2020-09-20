@@ -27,7 +27,7 @@
     <main class="container-w profile">
       <% if (module) { %>
       <h1 class="display"><%= module.name %></h1>
-      <%= module.description %> <% } else { %>
+      <%- content %> <% } else { %>
       <h1 class="display">Module not found</h1>
       <% } %>
     </main>

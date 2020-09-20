@@ -54,6 +54,14 @@ img {
   margin: 1rem;
 }
 
+input[type='text'],
+input[type='email'],
+input[type='password'],
+textarea {
+  width: 100%;
+  padding: 0.5rem;
+}
+
 /* class applies to select element itself, not a wrapper element */
 .select-css {
   display: block;

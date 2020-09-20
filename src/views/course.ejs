@@ -27,7 +27,7 @@
     <main class="container-w profile">
       <% if (course) { %>
       <h1 class="display"><%= course.name %></h1>
-      <%= course.description %> <% } else { %>
+      <%- content %> <% } else { %>
       <h1 class="display">Course not found</h1>
       <% } %>
     </main>

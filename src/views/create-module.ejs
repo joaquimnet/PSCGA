@@ -26,38 +26,65 @@
       </ul>
     </nav>
     <main class="container-w">
-      <div id="editor"></div>
-        <div id="form">
-          <select name="course" id="course">
-            TODO: option v-for goes here
+      <form id="form" @submit.prevent="submitForm">
+        <div class="form-control">
+          <label for="Name">Module Name</label>
+          <input type="text" id="name" v-model="moduleName" />
+        </div>
+        <div class="form-control">
+          <label for="description">Description</label>
+          <textarea id="description" v-model="description"></textarea>
+        </div>
+        <div class="form-control">
+          <label for="course">Course</label>
+          <select name="course" id="course" @change="onCourseChange" class="select-css">
+            <option>---</option>
+            <option v-for="course of courses">
+              {{ course.name }}
+            </option>
           </select>
         </div>
+        <div class="form-control flex-center">
+          <input type="submit" value="Create Module" />
+        </div>
+      </form>
     </main>
-    <script src="/js/jodit.min.js"></script>
     <script>
-      window.editor = new Jodit('#editor', {
-        uploader: {
-          insertImageAsBase64URI: true,
-        },
-      });
-
       window.$vm = new Vue({
         el: '#form',
         data: {
+          moduleName: '',
+          description: '',
           selectedCourse: '',
-          selectedModule: '',
           courses: [],
-          modules: [],
         },
         methods: {
-          onCourseChange(e) {
-            fetch('/api/modules')
+          submitForm(e) {
+            fetch('/api/module', {
+              method: 'POST',
+              body: JSON.stringify({
+                name: this.moduleName,
+                description: this.description,
+                courseId: this.getCourseIdByName(this.selectedCourse),
+              }),
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            })
               .then((res) => res.json())
-              .then((data) => (this.data.modules = data));
+              .then(console.log)
+              .catch(console.error);
+          },
+          getCourseIdByName(name) {
+            return (this.courses.find((c) => c.name === name) || {})._id;
+          },
+          onCourseChange(e) {
+            console.log(e.target.value);
+            this.selectedCourse = e.target.value;
           },
         },
         mounted() {
-          fetch('/api/courses')
+          fetch('/api/course')
             .then((res) => res.json())
             .then((courses) => (this.courses = courses));
         },

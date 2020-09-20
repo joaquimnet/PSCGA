@@ -59,6 +59,9 @@ app.get('/', (req, res) => {
 });
 
 app.use((req, res) => {
+  if (req.method === 'GET') {
+    return res.redirect('/');
+  }
   return res.status(404).end('Not Found');
 });
 

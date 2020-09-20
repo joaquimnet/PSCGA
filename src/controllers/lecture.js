@@ -1,4 +1,4 @@
-const sanitize = require('sanitize-html');
+const { sanitize } = require('../util');
 const { Lecture, Module } = require('../models');
 
 exports.get_lecture_editor = (req, res) => {
@@ -10,27 +10,7 @@ exports.get_lecture_view = async (req, res) => {
   const lecture = await Lecture.byId(id);
   res.render('lecture', {
     lecture,
-    content: sanitize(lecture.content, {
-      allowedTags: sanitize.defaults.allowedTags.concat(['img', 'span']),
-      allowedAttributes: {
-        ...sanitize.defaults.allowedAttributes,
-        '*': ['style'],
-      },
-      allowedStyles: {
-        '*': {
-          // Match HEX and RGB
-          color: [/^#(0x)?[0-9a-f]+$/i, /^rgb\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*\)$/],
-          'text-align': [/^left$/, /^right$/, /^center$/],
-          // Match any number with px, em, or %
-          'font-size': [/^\d+(?:px|em|%)$/],
-          width: [/^\d+(?:px|em|%)$/],
-          height: [/^\d+(?:px|em|%)$/],
-        },
-        p: {
-          'font-size': [/^\d+rem$/],
-        },
-      },
-    }),
+    content: sanitize(lecture.content),
   });
 };
 

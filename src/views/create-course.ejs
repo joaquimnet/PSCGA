@@ -26,40 +26,43 @@
       </ul>
     </nav>
     <main class="container-w">
-      <div id="editor"></div>
-        <div id="form">
-          <select name="course" id="course">
-            TODO: option v-for goes here
-          </select>
+      <form id="form" @submit.prevent="submitForm">
+        <div class="form-control">
+          <label for="Name">Course Name</label>
+          <input type="text" id="name" v-model="courseName" />
         </div>
+        <div class="form-control">
+          <label for="description">Description</label>
+          <textarea id="description" v-model="description"></textarea>
+        </div>
+        <div class="form-control flex-center">
+          <input type="submit" value="Create Course" />
+        </div>
+      </form>
     </main>
-    <script src="/js/jodit.min.js"></script>
     <script>
-      window.editor = new Jodit('#editor', {
-        uploader: {
-          insertImageAsBase64URI: true,
-        },
-      });
-
       window.$vm = new Vue({
         el: '#form',
         data: {
-          selectedCourse: '',
-          selectedModule: '',
-          courses: [],
-          modules: [],
+          courseName: '',
+          description: '',
         },
         methods: {
-          onCourseChange(e) {
-            fetch('/api/modules')
+          submitForm(e) {
+            fetch('/api/course', {
+              method: 'POST',
+              body: JSON.stringify({
+                name: this.courseName,
+                description: this.description,
+              }),
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            })
               .then((res) => res.json())
-              .then((data) => (this.data.modules = data));
+              .then(console.log)
+              .catch(console.error);
           },
-        },
-        mounted() {
-          fetch('/api/courses')
-            .then((res) => res.json())
-            .then((courses) => (this.courses = courses));
         },
       });
     </script>
