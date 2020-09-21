@@ -12,6 +12,7 @@ exports.get_module_view = async (req, res) => {
     module,
     content: sanitize(module?.description),
     lectures: module ? await Lecture.find({ moduleId: module._id }) : [],
+    page: module.name,
   });
 };
 

@@ -1,7 +1,7 @@
 const sanitize = require('sanitize-html');
 
 exports.sanitize = (content) => sanitize(content, {
-  allowedTags: sanitize.defaults.allowedTags.concat(['img', 'span']),
+  allowedTags: sanitize.defaults.allowedTags.concat(['img', 'span', 'h1', 'h2']),
   allowedAttributes: {
     ...sanitize.defaults.allowedAttributes,
     '*': ['style'],

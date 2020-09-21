@@ -8,6 +8,7 @@ body {
   min-height: 100vh;
   font-family: -apple-system, BlinkMacSystemFont, Raleway, Roboto, 'Helvetica Neue', 'Segoe UI',
     Oxygen, Ubuntu, Cantarell, 'Open Sans', sans-serif;
+  position: relative;
 }
 
 img {

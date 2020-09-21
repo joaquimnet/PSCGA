@@ -24,6 +24,7 @@
         <li><a href="http://art.ponatech.com/" class="cta">Go To Main Site</a></li>
       </ul>
     </nav>
+    <%- include('partials/hero-small', { page }) %>
     <main class="container-w profile">
       <div class="course-card-holder">
         <% for (course of courses) { %>
@@ -39,5 +40,6 @@
         <% } %>
       </div>
     </main>
+    <%- include('partials/footer') %>
   </body>
 </html>

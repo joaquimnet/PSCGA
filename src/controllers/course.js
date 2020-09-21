@@ -12,12 +12,13 @@ exports.get_course_view = async (req, res) => {
     course,
     content: sanitize(course?.description),
     modules: course ? await Module.find({ courseId: course._id }) : [],
+    page: course.name,
   });
 };
 
 exports.list_courses_view = async (req, res) => {
   const courses = await Course.find({}).exec();
-  res.render('courses', { courses });
+  res.render('courses', { courses, page: 'Courses' });
 };
 
 exports.list_courses = async (req, res) => {

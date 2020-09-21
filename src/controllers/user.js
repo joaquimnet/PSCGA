@@ -21,10 +21,10 @@ exports.get_profile = (req, res) => {
 exports.get_profile_specific = async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
-    res.render('user', { user });
+    res.render('user', { user, page: 'Profile' });
   } catch (err) {
     if (err.message.match(/Cast to ObjectId/)) {
-      res.render('user', { user: null });
+      res.render('user', { user: null, page: 'Profile' });
     }
   }
 };

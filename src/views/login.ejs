@@ -24,20 +24,9 @@
         <li><a href="http://art.ponatech.com/" class="cta">Go To Main Site</a></li>
       </ul>
     </nav>
-    <div class="hero container-w flex-center text-center">
-      <div class="blur"></div>
-      <h1>Ponatech School for Computer Graphics and Animation</h1>
-      <p>
-        Do you want to bring to life amazing things? Do you want to show people fantastic worlds? Do
-        you want to create beautiful graphics? Do you want to make breathtaking animations?
-      </p>
-      <p>
-        If you answered yes to any of those questions you might be a creative soul and that's ok.
-        We'll help you out.
-      </p>
-      <a href="http://art.ponatech.com/" class="cta">Go To Main Site</a>
-    </div>
+    <%- include('partials/hero-small', { page }) %>
     <div class="divider container-w" aria-hidden="true"></div>
     <main class="container-w"><%- include('partials/login-page') %></main>
+    <%- include('partials/footer') %>
   </body>
 </html>

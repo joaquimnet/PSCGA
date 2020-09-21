@@ -24,6 +24,7 @@
         <li><a href="http://art.ponatech.com/" class="cta">Go To Main Site</a></li>
       </ul>
     </nav>
+    <%- include('partials/hero-small', {page: ''}) %>
     <main class="container-w profile">
       <% if (lecture) { %>
       <h1 class="display"><%= lecture.grouping %> - <%= lecture.title %></h1>
@@ -31,5 +32,6 @@
       <h1 class="display">Lecture not found</h1>
       <% } %>
     </main>
+    <%- include('partials/footer') %>
   </body>
 </html>
