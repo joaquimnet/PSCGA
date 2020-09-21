@@ -18,6 +18,7 @@ const DiscordStrategy = require('./strategies/discord-strategy');
 const app = express();
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, './views'));
+app.set('trust proxy', true);
 
 app.use(morgan('tiny'));
 app.use(
