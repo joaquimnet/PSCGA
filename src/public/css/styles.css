@@ -230,3 +230,61 @@ a.discord {
 .profile .avatar {
   width: 8rem;
 }
+
+.list {
+  list-style: none;
+}
+
+.list-item {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid gray;
+}
+
+.list-item a {
+  color: inherit;
+}
+
+.list-item:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.course-card {
+  width: 100%;
+  max-width: 22rem;;
+  min-height: 16rem;
+  margin: auto;
+  padding: 1rem;
+  border-radius: 1rem;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2), 1px -2px 2px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+@media only screen and (min-width: 720px) {
+  .course-card-holder {
+    display: flex;
+    min-height: 40vh;
+  }
+
+  .course-card {
+    width: 30%;
+    margin: 1rem;
+  }
+}
+
+.course-card-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.course-card-description {
+  color: black;
+  font-family: Roboto, sans-serif;
+  margin-bottom: 0.5rem;
+}
+
+.course-card-image {
+  border-radius: 1rem;
+  margin-top: auto;
+}

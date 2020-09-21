@@ -12,5 +12,6 @@ router.delete('/api/course/:id', express.json(), controller.delete_course);
 
 router.get('/course/create', controller.get_course_editor);
 router.get('/course/:id', controller.get_course_view);
+router.get('/courses', controller.list_courses_view);
 
 module.exports = router;

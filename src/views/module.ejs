@@ -27,7 +27,17 @@
     <main class="container-w profile">
       <% if (module) { %>
       <h1 class="display"><%= module.name %></h1>
-      <%- content %> <% } else { %>
+      <%- content %> <% if (lectures.length) { %>
+      <h2 class="m-1">Lectures in this course</h2>
+      <% for (lecture of lectures) { %>
+      <ul class="list m-1">
+        <li class="list-item">
+          <a href="/lecture/<%= lecture._id %>">
+            <b><%= lecture.title %></b>
+          </a>
+        </li>
+      </ul>
+      <% }} %> <% } else { %>
       <h1 class="display">Module not found</h1>
       <% } %>
     </main>

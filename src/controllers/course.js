@@ -1,5 +1,5 @@
 const { sanitize } = require('../util');
-const { Course } = require('../models');
+const { Course, Module } = require('../models');
 
 exports.get_course_editor = (req, res) => {
   res.render('create-course');
@@ -8,7 +8,16 @@ exports.get_course_editor = (req, res) => {
 exports.get_course_view = async (req, res) => {
   const { id } = req.params;
   const course = await Course.byId(id);
-  res.render('course', { course, content: sanitize(course?.description) });
+  res.render('course', {
+    course,
+    content: sanitize(course?.description),
+    modules: course ? await Module.find({ courseId: course._id }) : [],
+  });
+};
+
+exports.list_courses_view = async (req, res) => {
+  const courses = await Course.find({}).exec();
+  res.render('courses', { courses });
 };
 
 exports.list_courses = async (req, res) => {

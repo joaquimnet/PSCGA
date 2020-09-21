@@ -25,22 +25,19 @@
       </ul>
     </nav>
     <main class="container-w profile">
-      <% if (course) { %>
-      <h1 class="display"><%= course.name %></h1>
-      <%- content %>
-      <% if (modules.length) { %>
-      <h2 class="m-1">Modules in this course</h2>
-      <% for (module of modules) { %>
-      <ul class="list m-1">
-        <li class="list-item">
-          <a href="/module/<%= module._id %>">
-            <b><%= module.name %></b> <%= module.description %>
-          </a>
-        </li>
-      </ul>
-      <% }} %> <% } else { %>
-      <h1 class="display">Course not found</h1>
-      <% } %>
+      <div class="course-card-holder">
+        <% for (course of courses) { %>
+        <a href="/course/<%= course._id %> " class="course-card">
+          <p class="course-card-title"><%= course.name %></p>
+          <p class="course-card-description"><%= course.description %></p>
+          <img
+            src="https://picsum.photos/seed/<%= course.name %>/300/200"
+            alt="<%= course.name %> "
+            class="course-card-image"
+          />
+        </a>
+        <% } %>
+      </div>
     </main>
   </body>
 </html>
